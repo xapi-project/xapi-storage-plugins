@@ -19,7 +19,7 @@ def configure_logging():
 
     handlers = []
 
-    #Log to syslog
+    # Log to syslog
     handlers.append(logging.handlers.SysLogHandler(
         address='/dev/log',
         facility=LOG_SYSLOG_FACILITY))
