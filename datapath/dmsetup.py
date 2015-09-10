@@ -2,7 +2,7 @@
 
 import xapi
 import fcntl
-import log
+from xapi.storage import log
 import os
 import array
 import struct
