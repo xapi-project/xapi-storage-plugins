@@ -6,8 +6,8 @@ import sys
 import xapi
 import xapi.datapath
 import xapi.volume
-from ffs import tapdisk, image
-from ffs import log
+from xapi.storage.datapath import tapdisk, image
+from xapi.storage.datapath import log
 
 
 class Implementation(xapi.datapath.Datapath_skeleton):

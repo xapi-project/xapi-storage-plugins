@@ -4,7 +4,7 @@ import os
 import sys
 import xapi
 import xapi.plugin
-from ffs import log
+from xapi.storage.datapath import log
 
 
 class Implementation(xapi.plugin.Plugin_skeleton):

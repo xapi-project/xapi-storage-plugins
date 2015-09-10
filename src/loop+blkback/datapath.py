@@ -5,8 +5,8 @@ import os
 import sys
 import xapi
 import xapi.datapath
-from ffs import losetup, dmsetup
-from ffs import log
+from xapi.storage.datapath import losetup, dmsetup
+from xapi.storage.datapath import log
 
 
 class Implementation(xapi.datapath.Datapath_skeleton):
