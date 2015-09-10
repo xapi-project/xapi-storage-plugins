@@ -8,6 +8,6 @@ install:
   #- pip install pylint --use-mirrors
   #- pip install nose --use-mirrors
 script:
-  - flake8 --show-source --show-pep8 datapath/*/* lib/* overlay/etc/xapi.d/plugins/* volume/*/*
+  - flake8 --show-source --show-pep8 src/*/* datapath/*
   #- pylint lib datapath volume
   #- nosetests
