@@ -1,6 +1,6 @@
 TAPDISK_COMMANDS=Plugin.Query Datapath.activate Datapath.attach Datapath.deactivate Datapath.detach Datapath.open Datapath.close
 LOOP_COMMANDS=Plugin.Query Datapath.activate  Datapath.attach  Datapath.deactivate  Datapath.detach
-LIB_FILES=__init__.py losetup.py tapdisk.py dmsetup.py nbdclient.py nbdtool.py image.py common.py poolhelper.py log.py
+LIB_FILES=__init__.py device.py iscsi.py losetup.py tapdisk.py dmsetup.py nbdclient.py nbdtool.py image.py
 
 .PHONY: clean
 clean:
