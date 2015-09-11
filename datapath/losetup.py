@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os.path
-from common import call
+from xapi.storage.common import call
 
 # Use Linux "losetup" to create block devices from files
 

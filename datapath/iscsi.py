@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from common import call
+from xapi.storage.common import call
 
 """
 Manage an open-iscsi initiator

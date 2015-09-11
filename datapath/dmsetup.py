@@ -6,7 +6,7 @@ from xapi.storage import log
 import os
 import array
 import struct
-from common import call
+from xapi.storage.common import call
 
 # Use device mapper to suspend and resume block devices
 

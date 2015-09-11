@@ -8,7 +8,7 @@ import signal
 
 import xapi
 import image
-from common import call
+from xapi.storage.common import call
 
 # Use Xen tapdisk to create block devices from files
 

@@ -3,7 +3,7 @@
 import os
 import errno
 import pickle
-from common import call
+from xapi.storage.common import call
 import image
 import losetup
 import dmsetup

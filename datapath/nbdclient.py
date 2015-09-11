@@ -3,7 +3,7 @@
 import os
 import errno
 import pickle
-from common import call
+from xapi.storage.common import call
 
 """
 Use Linux "nbd-client" to create block devices from NBD servers.
