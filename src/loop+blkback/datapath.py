@@ -4,12 +4,13 @@ import urlparse
 import os
 import sys
 import xapi
-import xapi.datapath
+import xapi.storage.datapath
+import xapi.storage.api.datapath
 from xapi.storage.datapath import losetup, dmsetup
-from xapi.storage.datapath import log
+from xapi.storage import log
 
 
-class Implementation(xapi.datapath.Datapath_skeleton):
+class Implementation(xapi.storage.api.datapath.Datapath_skeleton):
 
     def activate(self, dbg, uri, domain):
         return
@@ -18,7 +19,7 @@ class Implementation(xapi.datapath.Datapath_skeleton):
         u = urlparse.urlparse(uri)
         # XXX need a datapath-specific error
         if not(os.path.exists(u.path)):
-            raise xapi.volume.Volume_does_not_exist(u.path)
+            raise xapi.storage.api.volume.Volume_does_not_exist(u.path)
         loop = losetup.create(dbg, u.path)
         dm = dmsetup.create(dbg, loop.block_device())
         return {
@@ -33,7 +34,7 @@ class Implementation(xapi.datapath.Datapath_skeleton):
         u = urlparse.urlparse(uri)
         # XXX need a datapath-specific error
         if not(os.path.exists(u.path)):
-            raise xapi.volume.Volume_does_not_exist(u.path)
+            raise xapi.storage.api.volume.Volume_does_not_exist(u.path)
         loop = losetup.find(dbg, u.path)
         dm = dmsetup.find(dbg, loop.block_device())
         dm.destroy(dbg)
@@ -41,7 +42,7 @@ class Implementation(xapi.datapath.Datapath_skeleton):
 
 if __name__ == "__main__":
     log.log_call_argv()
-    cmd = xapi.datapath.Datapath_commandline(Implementation())
+    cmd = xapi.storage.api.datapath.Datapath_commandline(Implementation())
     base = os.path.basename(sys.argv[0])
     if base == "Datapath.activate":
         cmd.activate()
@@ -52,4 +53,4 @@ if __name__ == "__main__":
     elif base == "Datapath.detach":
         cmd.detach()
     else:
-        raise xapi.datapath.Unimplemented(base)
+        raise xapi.storage.api.datapath.Unimplemented(base)
