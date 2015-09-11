@@ -4,13 +4,13 @@ import urlparse
 import os
 import sys
 import xapi
-import xapi.datapath
-import xapi.volume
+import xapi.storage.api.datapath
+import xapi.storage.api.volume
 from xapi.storage.datapath import tapdisk, image
-from xapi.storage.datapath import log
+from xapi.storage import log
 
 
-class Implementation(xapi.datapath.Datapath_skeleton):
+class Implementation(xapi.storage.api.datapath.Datapath_skeleton):
 
     def activate(self, dbg, uri, domain):
         return
@@ -19,7 +19,7 @@ class Implementation(xapi.datapath.Datapath_skeleton):
         u = urlparse.urlparse(uri)
         # XXX need some datapath-specific errors below
         if not(os.path.exists(u.path)):
-            raise xapi.volume.Volume_does_not_exist(u.path)
+            raise xapi.storage.api.volume.Volume_does_not_exist(u.path)
         if u.scheme[:3] == "vhd":
             img = image.Vhd(u.path)
         elif u.scheme[:3] == "raw":
@@ -37,7 +37,7 @@ class Implementation(xapi.datapath.Datapath_skeleton):
         u = urlparse.urlparse(uri)
         # XXX need some datapath-specific errors below
         if not(os.path.exists(u.path)):
-            raise xapi.volume.Volume_does_not_exist(u.path)
+            raise xapi.storage.api.volume.Volume_does_not_exist(u.path)
         return None
 
     def deactivate(self, dbg, uri, domain):
@@ -47,7 +47,7 @@ class Implementation(xapi.datapath.Datapath_skeleton):
         u = urlparse.urlparse(uri)
         # XXX need a datapath-specific error
         if not(os.path.exists(u.path)):
-            raise xapi.volume.Volume_does_not_exist(u.path)
+            raise xapi.storage.api.volume.Volume_does_not_exist(u.path)
         tap = tapdisk.find_by_file(dbg, image.Path(u.path))
         tap.close(dbg)
         tap.destroy(dbg)
@@ -56,12 +56,12 @@ class Implementation(xapi.datapath.Datapath_skeleton):
         u = urlparse.urlparse(uri)
         # XXX need some datapath-specific errors below
         if not(os.path.exists(u.path)):
-            raise xapi.volume.Volume_does_not_exist(u.path)
+            raise xapi.storage.api.volume.Volume_does_not_exist(u.path)
         return None
 
 if __name__ == "__main__":
     log.log_call_argv()
-    cmd = xapi.datapath.Datapath_commandline(Implementation())
+    cmd = xapi.storage.api.datapath.Datapath_commandline(Implementation())
     base = os.path.basename(sys.argv[0])
     if base == "Datapath.activate":
         cmd.activate()
@@ -76,4 +76,4 @@ if __name__ == "__main__":
     elif base == "Datapath.open":
         cmd.open()
     else:
-        raise xapi.datapath.Unimplemented(base)
+        raise xapi.storage.api.datapath.Unimplemented(base)
