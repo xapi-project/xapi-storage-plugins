@@ -16,7 +16,7 @@ class Implementation(xapi.storage.api.datapath.Datapath_skeleton):
             'domain_uuid': '0',
             'implementation': [ 'Blkback', u.path ],
         }
-    def dctivate(self, dbg, uri, domain):
+    def activate(self, dbg, uri, domain):
         return
     def detach(self, dbg, uri, domain):
         return
