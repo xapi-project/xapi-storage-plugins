@@ -7,19 +7,24 @@ import xapi
 import xapi.storage.api.datapath
 from xapi.storage import log
 
-import argparse, json, urlparse
+import urlparse
+
 
 class Implementation(xapi.storage.api.datapath.Datapath_skeleton):
+
     def attach(self, dbg, uri, domain):
         u = urlparse.urlparse(uri)
         return {
             'domain_uuid': '0',
-            'implementation': [ 'Blkback', u.path ],
+            'implementation': ['Blkback', u.path],
         }
+
     def activate(self, dbg, uri, domain):
         return
+
     def detach(self, dbg, uri, domain):
         return
+
     def deactivate(self, dbg, uri, domain):
         return
 
