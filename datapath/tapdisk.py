@@ -128,6 +128,9 @@ def list(dbg):
             pid = int(bits[0][len(prefix):])
         minor = None
         prefix = "minor="
+        if len(bits) <= 1:
+            results.append(Tapdisk(None, pid, None))
+            continue
         if bits[1].startswith(prefix):
             minor = int(bits[1][len(prefix):])
         if len(bits) <= 3:
