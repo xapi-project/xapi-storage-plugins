@@ -40,10 +40,10 @@ class Implementation(xapi.storage.api.datapath.Datapath_skeleton):
             raise xapi.storage.api.volume.Volume_does_not_exist(u.path)
         return None
 
-    def deactivate(self, dbg, uri, domain):
+    def detach(self, dbg, uri, domain):
         return
 
-    def detach(self, dbg, uri, domain):
+    def deactivate(self, dbg, uri, domain):
         u = urlparse.urlparse(uri)
         # XXX need a datapath-specific error
         if not(os.path.exists(u.path)):
