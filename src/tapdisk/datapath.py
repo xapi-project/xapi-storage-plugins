@@ -13,6 +13,7 @@ import pickle
 TD_PROC_METADATA_DIR = "/var/run/nonpersistent/dp-tapdisk"
 TD_PROC_METADATA_FILE = "meta.pickle"
 
+
 class Implementation(xapi.storage.api.datapath.Datapath_skeleton):
 
     def activate(self, dbg, uri, domain):
@@ -70,13 +71,14 @@ class Implementation(xapi.storage.api.datapath.Datapath_skeleton):
         try:
             os.makedirs(dirname, mode=0755)
         except OSError as e:
-            if e.errno != 17: # 17 == EEXIST, which is harmless
+            if e.errno != 17:  # 17 == EEXIST, which is harmless
                 raise e
         with open(dirname + "/" + TD_PROC_METADATA_FILE, "w") as fd:
             pickle.dump(tap.__dict__, fd)
 
     def load_tapdisk(self, dbg, uri):
-        """ Recover the tapdisk metadata for this URI from host-local storage """
+        """Recover the tapdisk metadata for this URI from host-local
+           storage."""
         dirname = self._metadata_dir(uri)
         if not(os.path.exists(dirname)):
             # XXX throw a better exception
@@ -88,7 +90,7 @@ class Implementation(xapi.storage.api.datapath.Datapath_skeleton):
             return tap
 
     def forget_tapdisk(self, dbg, uri):
-        """ Delete the tapdisk metadata for this URI from host-local storage """
+        """Delete the tapdisk metadata for this URI from host-local storage."""
         dirname = self._metadata_dir(uri)
         try:
             os.unlink(dirname + "/" + TD_PROC_METADATA_FILE)
